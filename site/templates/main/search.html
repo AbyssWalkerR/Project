@@ -1,0 +1,45 @@
+{% extends "main/layout.html" %}
+{% block back %}
+<li class="nav-item">
+{% if g.w !=None %}
+<a class="nav-link darkgr" href="{{ url_for('index2', neww=g.w) }}">Назад</a>
+{% elif g.b == 'Itebooks главное' %}
+<a class="nav-link darkgr" href="{{ url_for('books') }}">Назад</a>
+{% else %}
+<a class="nav-link darkgr" href="{{ url_for('index') }}">Назад</a>
+{% endif %}
+</li>
+{% endblock %}
+{% block body %}
+{% for new in news %}
+<div class="card">
+  <div class="card-body lightb">
+{% if new.image != '' %}
+<p><img class="card-img-top" src="{{new.image}}"></p>
+{% endif %}
+
+    {% if g.b == 'Itebooks главное' %}
+  <h5 class="card-title lightgr" data-toggle="tooltip" title="Перейти на сайт новости"><a href="{{ new.link }}">{{new.title}}</a></h5>
+    {% else %}
+    <h5 class="card-title lightgr" data-toggle="tooltip" title="Перейти на сайт новости"><a href="{{ url_for('recent',url=new.link,id=new.id) }}">{{new.title}}</a></h5>
+    {% endif %}
+    <p class="card-text">{{new.description}}</p>
+      <div class="card-footer">
+        <p class="card-text"><small class="text-muted">{{new.date}}</small></p>
+        {% if new.source is defined %}
+        <p class="card-text">Источник: {{new.source}}</p>
+      {% endif %}
+      </div>
+  </div>
+  </div>
+{% endfor %}
+{% endblock %}
+{% block pag %}
+{% if pagination is defined %}
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+  {{ pagination.links }}
+  </ul>
+</nav>
+{% endif %}
+{% endblock%}

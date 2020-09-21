@@ -1,0 +1,8 @@
+{% extends "acc/account.html" %}
+{% block body %}
+    <form class="form-signin darkgr" style="width: 100%;max-width: 330px;padding: 15px;margin: 0 auto;" method="POST" action="{{ url_for('forgotpass', token=token) }}">
+	  <a class="h5 mb-3 font-weight-normal">Новый пароль:</a>
+      <input type="password" id="inputNewPass" name="new_password" value="" class="form-control mb-3" autofocus="">
+      <button class="btn btn-lg darkgr lightb btn-block">Сохранить</button>
+    </form>
+{% endblock %}

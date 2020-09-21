@@ -1,0 +1,13 @@
+{% extends "acc/account.html" %}
+{% block body %}
+<div class="text-center">
+    <form class="form-signin darkgr" style="width: 100%;max-width: 330px;padding: 15px;margin: 0 auto;" method="POST" action="">
+        <video class="mb-4" type="video/mp4" src="{{ url_for('static', filename='driftveil city dancing lizard 30 minutes.mp4') }}" alt="" width="320" height="240" autoplay controls muted></video>
+        <h1 class="h3 mb-3 font-weight-normal">Форма регистрации</h1>
+      <input type="email" id="inputEmail" name="email" class="form-control m-1" placeholder="Почта" autofocus="">
+	  <input type="text" id="inputName" name="name" class="form-control m-1" placeholder="Имя/Ник" autofocus="">
+      <input type="password" id="inputPassword" name="password" class="form-control m-1" placeholder="Пароль">
+      <button class="btn btn-lg darkgr lightb btn-block m-1" type="submit">Регистрация</button>
+    </form>
+</div>
+{% endblock %}

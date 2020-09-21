@@ -1,0 +1,14 @@
+{% extends "acc/account.html" %}
+{% block body %}
+    <form class="form-signin darkgr" style="width: 100%;max-width: 330px;padding: 15px;margin: 0 auto;" method="POST" action="{{ request.path }}">
+	  <a class="h5 font-weight-normal">Имя/Ник:</a>
+	  <input type="text" id="inputName" name="name" value="{{ user.name }}" class="form-control mb-3 mt-2" placeholder="Имя/Ник" autofocus="">
+	  <a class="h5 font-weight-normal">Почта:</a>
+      <input type="email" id="inputEmail" name="email" value="{{ user.email }}" class="form-control mb-3 mt-2" placeholder="Почта" autofocus="">
+	  <a class="h5 font-weight-normal">Старый пароль:</a>
+      <input type="password" id="inputPassword" name="password" value="" class="form-control mb-3 mt-2" placeholder="Пароль">
+	  <a class="h5 font-weight-normal">Новый пароль:</a>
+      <input type="password" id="inputNewPassword" name="new_password" value="" class="form-control mb-3 mt-2" placeholder="Пароль">
+      <button class="btn btn-lg darkgr lightb btn-block">Сохранить</button>
+    </form>
+{% endblock %}

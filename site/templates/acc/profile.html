@@ -1,0 +1,13 @@
+{% extends "acc/account.html" %}
+{% block body %}
+{% if session['loggedin']==true %}
+<h2 class="title">
+  Страница аккаунта
+</h2>
+<div class="span8 darkgr">
+            <h5>Ник/Имя: {{ account[1] }}</h5>
+            <h5>Почта: {{ account[2] }}</h5>
+            <h6><a href="{{ url_for('edit', id=account[0]) }}">Изменить данные аккаунта</a></h6>
+</div>
+{% endif %}
+{% endblock %}

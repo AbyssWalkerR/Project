@@ -1,0 +1,92 @@
+{% extends "main/layout.html" %}
+{% block search %}
+<form class="form-inline my-2 my-lg-0" method="get" action="{{ url_for('search') }}">
+  <input class="form-control mr-sm-2" type="text" name="search" placeholder="Текст запроса" />
+  <input hidden type="text" name="search2" value="{{naw}}"/>
+  <button class="btn my-2 my-sm-0 darkgr lightb" type="submit">Поиск</button>
+</form>
+{% endblock %}
+{% block body %}
+{% for new in news %}
+<div class="card">
+<div class="card-body lightb">
+  {% if new.image != '' %}
+<p><img class="card-img-top" src="{{new.image}}"></p>
+{% endif %}
+
+  <h5 class="card-title lightgr" data-toggle="tooltip" title="Перейти на сайт новости"><a href="{{ url_for('recent',url=new.link,id=new.id) }}">{{new.title}}</a></h5>
+    <p class="card-text darkgr">{{new.description}}</p>
+      <div class="card-footer">
+        <p class="card-text"><small class="text-muted">{{new.date}}</small></p>
+        <div class="d-flex flex-row">
+          {% if session['loggedin']!=true %}
+             <div class="card-text darkgr"  data-toggle="tooltip" title="После регистрации можно скрыть источник">Источник: {{new.source}}</div>
+          {% endif %}
+          {% if session['loggedin']==true %}
+          <div class="card-text darkgr">Источник: {{new.source}}</div>
+            <div class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle p-0" href="" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+                  <a class="dropdown-item darkgr" href="{{ url_for('delsource',name=new.source)}}">Скрыть источник</a>
+                  <a class="dropdown-item darkgr" href="{{ url_for('ressource')}}">Сбросить источники</a>
+                </div>
+            </div>
+          {% endif %}
+        </div>
+
+      </div>
+  </div>
+  </div>
+{% endfor %}
+{% endblock %}
+{% block pag %}
+{% if pagination is defined %}
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+  {{ pagination.links }}
+  </ul>
+</nav>
+{% endif %}
+{% endblock%}
+
+{% block recomends %}
+{% if recomend is defined %}
+<button type="button" class="btn darkgr" data-toggle="modal" data-target="#exampleModalCenter">
+  Рекомендация
+</button>
+<div class="modal" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Может быть интересно</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+<div class="card">
+<div class="card-body lightb">
+  {% if recomend.image != '' %}
+<p><img class="card-img-top" src="{{recomend.image}}"></p>
+{% endif %}
+  <h5 class="card-title lightgr" data-toggle="tooltip" title="Перейти на сайт новости"><a href="{{ url_for('recent',url=recomend.link,id=recomend.id) }}">{{recomend.title}}</a></h5>
+    <p class="card-text darkgr">{{recomend.description}}</p>
+      <div class="card-footer">
+        <p class="card-text"><small class="text-muted">{{recomend.date}}</small></p>
+        <div class="d-flex flex-row">
+          <div class="card-text darkgr">Источник: {{recomend.source}}</div>
+        </div>
+
+      </div>
+  </div>
+  </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endblock%}

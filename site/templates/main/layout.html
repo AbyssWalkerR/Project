@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+<head>
+<title>Main Page</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div style="height:56px"></div>
+<nav class="navbar navbar-expand-md fixed-top">
+      <a class="navbar-brand" href="{{ url_for('index') }}" data-toggle="tooltip" title="Перейти ко всем новостям!">Домой</a>
+      <button class="navbar-toggler p-0 border-0 " type="button" data-toggle="collapse" data-target="#navbarsExampleDefault">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+          {% if session['loggedin']==true %}
+		  <li class="nav-item">
+            <a class="nav-link darkgr" href="{{ url_for('profile') }}">Профиль</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link darkgr" href="{{ url_for('recentacc') }}">Недавно просмотренные</a>
+          </li>
+		  {% endif %}
+		  {% if session['loggedin']!=true %}
+          <li class="nav-item">
+            <a class="nav-link darkgr" href="{{ url_for('login') }}">Войти</a>
+          </li>
+		  <li class="nav-item">
+            <a class="nav-link darkgr" href="{{ url_for('signup') }}">Регистрация</a>
+          </li>
+		  {% endif %}
+		  {% if session['loggedin']==true %}
+		  <li class="nav-item">
+            <a class="nav-link darkgr" href="{{ url_for('logout') }}">Выйти</a>
+          </li>
+		  {% endif %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="/" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  {% if naw %}
+                    {{naw}}
+                  {% else %}
+                Выберите сайт-источник
+                {% endif %}
+            </a>
+            <div class="dropdown-menu lightb" data-toggle="tooltip" title="Выбрать отдельный источник" aria-labelledby="dropdown01">
+              <h5 class="dropdown-header lightgr">Русские ИТ сайты</h5>
+			  <a class="dropdown-item darkgr" href="{{ url_for('index2', neww='cnews') }}">Cnews главное</a>
+			  <a class="dropdown-item darkgr" href="{{ url_for('index2', neww='dnewshard') }}">3Dnews главное</a>
+			  <a class="dropdown-item darkgr" href="{{ url_for('index2', neww='dnewssoft') }}">3Dnews новости ПО</a>
+			  <h5 class="dropdown-header lightgr">Зарубежные ИТ сайты</h5>
+			  <a class="dropdown-item darkgr" href="{{ url_for('index2', neww='itworld') }}">Itworld главное</a>
+              <h5 class="dropdown-header lightgr">Книги</h5>
+              <a class="dropdown-item darkgr" href="{{ url_for('books') }}">Itebooks главное</a>
+            </div>
+          </li>
+            {% block back %}{% endblock %}
+            {% if session['loggedin']==true %}
+            {% block recomends %}{% endblock %}
+            {% endif %}
+        </ul>
+          {% block search %}{% endblock %}
+      </div>
+    </nav>
+
+  {% for message in get_flashed_messages() %}
+  <div class="flash" style="background: #CFEEF0; color:#015C65; padding: 0.5em;
+                  border: 1px solid #015C65;">{{ message }}</div>
+  {% endfor %}
+
+    <div class="container mt-4">
+        <div class="card-columns">
+  {% block body %}{% endblock %}
+        </div>
+        {% block pag %}{% endblock %}
+    </div>
+<script>
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();
+});
+</script>
+</body>
+</html>
+

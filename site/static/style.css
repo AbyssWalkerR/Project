@@ -1,0 +1,13 @@
+a, h1, h2, h5     { color: #015C65; }
+
+.navbar         {background-color: #35C0CD}
+.darkgr   {color: #015C65}
+.lightgr    {color: #02A4B3}
+.lightb {background:#BFE7EB;}
+.page-item  {background-color:#BFE7EB; color: #015C65}
+.page-link span  {color: #015C65}
+
+.dropdown-menu  {background-color: #CFEEF0}
+.dropdown-header {color: #02A4B3}
+.modal-backdrop{  z-index: 1;}
+

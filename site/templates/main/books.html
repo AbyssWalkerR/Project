@@ -1,0 +1,36 @@
+{% extends "main/layout.html" %}
+{% block search %}
+<form class="form-inline my-2 my-lg-0" method="get" action="{{ url_for('search') }}">
+  <input class="form-control mr-sm-2" type="text" name="search" placeholder="Текст запроса" />
+  <input hidden type="text" name="search2" value="Itebooks главное"/>
+  <button class="btn my-2 my-sm-0 darkgr lightb" type="submit">Поиск</button>
+</form>
+{% endblock %}
+{% block body %}
+{% for new in news %}
+<div class="card">
+<div class="card-body lightb">
+  {% if new.image != '' %}
+<p><img class="card-img-top" src="{{new.image}}"></p>
+{% endif %}
+
+  <h5 class="card-title lightgr" data-toggle="tooltip" title="Перейти на сайт новости"><a href="{{ new.link }}">{{new.title}}</a></h5>
+      <p class="card-text darkgr">{{new.description}}</p>
+    <div class="card-footer">
+        <p class="card-text"><small class="text-muted">{{new.date}}</small></p>
+        </div>
+
+      </div>
+  </div>
+{% endfor %}
+{% endblock %}
+
+{% block pag %}
+{% if pagination is defined %}
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+  {{ pagination.links }}
+  </ul>
+</nav>
+{% endif %}
+{% endblock%}

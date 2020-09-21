@@ -1,0 +1,8 @@
+{% extends "acc/account.html" %}
+{% block body %}
+    <form class="form-signin darkgr" style="width: 100%;max-width: 330px;padding: 15px;margin: 0 auto;" method="POST" action="{{ url_for('reset') }}">
+	  <a class="h5 font-weight-normal">Введите почту для сброса</a>
+      <input type="email" id="inputEmail" name="email" class="form-control mb-3 mt-2" autofocus="">
+      <button class="btn btn-lg darkgr lightb btn-block">Сбросить</button>
+    </form>
+{% endblock %}
