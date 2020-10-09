@@ -724,18 +724,10 @@ def async_download():
             getattr(WQ.Agreg,WQ.miltiplefunc.get(ke, 'waw'))()
         time.sleep(180)
 
-# def async_send_vanya(app, s):
-#     with app.app_context():
-#         requests.post("http://wgrm.webhop.me:5000/predict", json={"text":s})
-#
-# def send_vanya(s):
-#     for wq in s:
-#         thr = Thread(target=async_send_vanya,  args=[app,  wq['title']])
-#         thr.start()
-#         return thr
 
 
 if __name__ == '__main__':
+
     thw=threading.Thread(target=async_download)
     thw.start()
     # домен сайта - hrkq.ddns.net
