@@ -627,18 +627,9 @@ def search():
                                     news.append(aq.copy())
                                 res=[]
 
-                                # news.append( [ {
-                                #     'id': row[0],
-                                #     'title': row[1],
-                                #     'link': row[2],
-                                #     'description': row[3],
-                                #     'image': row[4],
-                                #     'date': row[5],
-                                #     'source': row[6],
-                                #     } for row in cur.fetchall()].copy())
+
 
             if len(news)>0:
-                # aw=[dict(t) for t in {tuple(d[0].items()) for d in news}]
                 aw=[]
                 seen=set()
                 for d in news:
